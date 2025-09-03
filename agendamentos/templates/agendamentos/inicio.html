@@ -1,0 +1,176 @@
+{% extends 'agendamentos/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        text-align: center;
+        padding: 50px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .hero h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    
+    .hero p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+    
+    .btn-hero {
+        background: white;
+        color: #667eea;
+        padding: 15px 40px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+    
+    .btn-hero:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 50px 0;
+    }
+    
+    .feature-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+        color: #667eea;
+    }
+    
+    .instructions {
+        background: #f8f9fa;
+        padding: 40px;
+        border-radius: 15px;
+        margin: 50px 0;
+    }
+    
+    .instructions h3 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #4a6572;
+    }
+    
+    .step {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .step-number {
+        background: #667eea;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>Bem-vindo ao Sistema de Agendamento</h2>
+    <p>Reserve salas de forma simples e rápida para suas aulas</p>
+    <a href="{% url 'agendar' %}" class="btn-hero">Fazer Agendamento →</a>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <div class="feature-icon">⏰</div>
+        <h3>Agendamento Rápido</h3>
+        <p>Reserve salas em poucos cliques, de qualquer dispositivo</p>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Controle de Horários</h3>
+        <p>Evite conflitos de agendamento entre professores</p>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Confirmação Imediata</h3>
+        <p>Receba confirmação instantânea do seu agendamento</p>
+    </div>
+</div>
+
+<div class="instructions">
+    <h3>Como fazer seu agendamento:</h3>
+    
+    <div class="step">
+        <div class="step-number">1</div>
+        <div>
+            <h4>Clique em "Fazer Agendamento"</h4>
+            <p>Acesse o formulário de reserva de salas</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">2</div>
+        <div>
+            <h4>Preencha os dados da aula</h4>
+            <p>Informe professor, data, horário e equipamentos necessários</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">3</div>
+        <div>
+            <h4>Confirme o agendamento</h4>
+            <p>Revise os dados e confirme sua reserva</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">4</div>
+        <div>
+            <h4>Pronto! 🎉</h4>
+            <p>Seu agendamento estará confirmado e disponível para consulta</p>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin: 50px 0;">
+    <a href="{% url 'agendar' %}" class="btn" style="max-width: 300px; margin: 0 auto;">
+        Começar Agendamento
+    </a>
+</div>
+{% endblock %}
