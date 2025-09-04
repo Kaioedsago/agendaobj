@@ -3,41 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novo Agendamento</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Sistema de Agendamentos Objetivo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="logo">Colégio Objetivo</div>
+  <header class="navbar">
+    <div class="logo">📚 Colégio Objetivo</div>
     <nav>
       <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="agd.html">Agendamentos</a></li>
+        <li><a href="#" class="active">Início</a></li>
+        <li><a href="#">Agendamentos</a></li>
         <li><a href="#">Ajuda</a></li>
         <li><a href="#">Admin</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-icon">📅</div>
+    <h1>Sistema de <span>agendamentos Objetivo</span></h1>
+    <p>
+      Nosso sistema foi desenvolvido para facilitar a rotina dos professores do Colégio Objetivo: simples, prático e ágil. 
+      Transforme a gestão de equipamentos escolares com uma plataforma eficiente que otimiza o seu dia a dia.
+    </p>
+  </section>
+
   <!-- Formulário -->
-  <section class="form-container">
+  <section class="form-section">
     <div class="form-card">
       <h2>Novo Agendamento</h2>
       <p>Preencha as informações abaixo para reservar seus equipamentos</p>
 
-      <form id="agendamentoForm">
+      <!-- Barra de progresso -->
+      <div class="steps">
+        <div class="step active">Dados Básicos</div>
+        <div class="step">Equipamentos</div>
+        <div class="step">Confirmação</div>
+      </div>
+
+      <!-- Passo 1 -->
+      <form id="formStep1" class="form-step active">
         <label for="nome">Nome Completo</label>
         <input type="text" id="nome" required>
-
-        <label for="equipamento">Equipamento</label>
-        <input type="text" id="equipamento" placeholder="Ex: Notebook, Projetor" required>
-
-        <label for="quantidade">Quantidade</label>
-        <input type="number" id="quantidade" min="1" required>
-
-        <label for="local">Local</label>
-        <input type="text" id="local" required>
 
         <label for="data">Data</label>
         <input type="date" id="data" required>
@@ -53,7 +62,49 @@
           </div>
         </div>
 
-        <button type="submit">Reservar</button>
+        <label for="sala">Sala</label>
+        <select id="sala" required>
+          <option value="">Selecione</option>
+          <option value="TI">Sala TI</option>
+          <option value="Maker">Sala Maker</option>
+          <option value="Outros">Outros</option>
+        </select>
+
+        <div id="salaDescricaoContainer" class="hidden">
+          <label for="salaDescricao">Descrição da Sala</label>
+          <input type="text" id="salaDescricao" placeholder="Descreva a sala">
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="repetir">
+          <label for="repetir">Repetir aula semanalmente no mesmo horário</label>
+        </div>
+
+        <button type="button" class="next-btn">Próximo</button>
+      </form>
+
+      <!-- Passo 2 -->
+      <form id="formStep2" class="form-step">
+        <h3>Selecione os equipamentos</h3>
+        <label><input type="checkbox" value="Notebook"> Notebook</label>
+        <label><input type="checkbox" value="Projetor"> Projetor</label>
+        <label><input type="checkbox" value="Caixa de Som"> Caixa de Som</label>
+
+        <div class="form-nav">
+          <button type="button" class="prev-btn">Voltar</button>
+          <button type="button" class="next-btn">Próximo</button>
+        </div>
+      </form>
+
+      <!-- Passo 3 -->
+      <form id="formStep3" class="form-step">
+        <h3>Confirmação</h3>
+        <div id="resumo"></div>
+
+        <div class="form-nav">
+          <button type="button" class="prev-btn">Voltar</button>
+          <button type="submit" class="submit-btn">Confirmar Reserva</button>
+        </div>
       </form>
     </div>
   </section>

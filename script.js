@@ -1,51 +1,63 @@
-// Salvar agendamento no localStorage
-const form = document.getElementById("agendamentoForm");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".form-step");
+  const stepIndicators = document.querySelectorAll(".step");
+  let currentStep = 0;
 
-    const agendamento = {
-      nome: document.getElementById("nome").value,
-      equipamento: document.getElementById("equipamento").value,
-      quantidade: document.getElementById("quantidade").value,
-      local: document.getElementById("local").value,
-      data: document.getElementById("data").value,
-      horaInicio: document.getElementById("horaInicio").value,
-      horaFim: document.getElementById("horaFim").value,
-      status: "ATIVO"
-    };
+  function showStep(index) {
+    steps.forEach((form, i) => form.classList.toggle("active", i === index));
+    stepIndicators.forEach((ind, i) => ind.classList.toggle("active", i === index));
+  }
 
-    // pega agendamentos existentes
-    const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
-    agendamentos.push(agendamento);
-    localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
-
-    // redireciona para a tela de listagem
-    window.location.href = "agd.html";
+  document.querySelectorAll(".next-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    });
   });
-}
 
-// Carregar agendamentos na página de listagem
-const cardsContainer = document.getElementById("cards");
-if (cardsContainer) {
-  const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
-
-  agendamentos.forEach((item) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    card.innerHTML = `
-      <div class="card-header">
-        <strong>Professor(a) ${item.nome}</strong>
-        <span class="status">${item.status}</span>
-      </div>
-      <p><b>${item.equipamento}</b></p>
-      <p>${item.quantidade} unidade(s)</p>
-      <p>📍 ${item.local}</p>
-      <p>📅 ${item.data}</p>
-      <p>⏰ ${item.horaInicio} - ${item.horaFim}</p>
-    `;
-
-    cardsContainer.appendChild(card);
+  document.querySelectorAll(".prev-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
   });
-}
+
+  // Mostrar descrição quando "Outros" for selecionado
+  const salaSelect = document.getElementById("sala");
+  const salaDescricao = document.getElementById("salaDescricaoContainer");
+
+  salaSelect.addEventListener("change", () => {
+    if (salaSelect.value === "Outros") {
+      salaDescricao.classList.remove("hidden");
+    } else {
+      salaDescricao.classList.add("hidden");
+    }
+  });
+
+  // Resumo no passo 3
+  const formStep3 = document.getElementById("formStep3");
+  formStep3.addEventListener("click", () => {
+    if (currentStep === 2) {
+      const resumoDiv = document.getElementById("resumo");
+      const nome = document.getElementById("nome").value;
+      const data = document.getElementById("data").value;
+      const horaInicio = document.getElementById("horaInicio").value;
+      const horaFim = document.getElementById("horaFim").value;
+      const sala = document.getElementById("sala").value;
+      const descricao = document.getElementById("salaDescricao").value;
+      const repetir = document.getElementById("repetir").checked ? "Sim" : "Não";
+
+      resumoDiv.innerHTML = `
+        <p><b>Nome:</b> ${nome}</p>
+        <p><b>Data:</b> ${data}</p>
+        <p><b>Horário:</b> ${horaInicio} - ${horaFim}</p>
+        <p><b>Sala:</b> ${sala} ${sala === "Outros" ? `(${descricao})` : ""}</p>
+        <p><b>Repetir semanalmente:</b> ${repetir}</p>
+      `;
+    }
+  });
+});
