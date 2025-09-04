@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Agendamento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Colégio Objetivo</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="agd.html">Agendamentos</a></li>
+        <li><a href="#">Ajuda</a></li>
+        <li><a href="#">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Formulário -->
+  <section class="form-container">
+    <div class="form-card">
+      <h2>Novo Agendamento</h2>
+      <p>Preencha as informações abaixo para reservar seus equipamentos</p>
+
+      <form id="agendamentoForm">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" required>
+
+        <label for="equipamento">Equipamento</label>
+        <input type="text" id="equipamento" placeholder="Ex: Notebook, Projetor" required>
+
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" min="1" required>
+
+        <label for="local">Local</label>
+        <input type="text" id="local" required>
+
+        <label for="data">Data</label>
+        <input type="date" id="data" required>
+
+        <div class="time-group">
+          <div>
+            <label for="horaInicio">Hora Início</label>
+            <input type="time" id="horaInicio" required>
+          </div>
+          <div>
+            <label for="horaFim">Hora Término</label>
+            <input type="time" id="horaFim" required>
+          </div>
+        </div>
+
+        <button type="submit">Reservar</button>
+      </form>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
