@@ -18,7 +18,7 @@ function showStep(i) {
   current = i;
 }
 
-// ===== Step 1: Sala "Outros" =====
+// ===== Primeiro Passo: Sala "Outros" =====
 const salaSelect = $("#salaSelect");
 const salaOutrosWrap = $("#salaOutrosWrap");
 const salaDescricao = $("#salaDescricao");
@@ -26,8 +26,9 @@ const salaDescricao = $("#salaDescricao");
 salaSelect.addEventListener("change", () => {
   const isOutros = salaSelect.value === "Outros";
   salaOutrosWrap.classList.toggle("is-hidden", !isOutros);
-  isOutros ? salaDescricao.setAttribute("required", "required")
-           : salaDescricao.removeAttribute("required");
+  isOutros
+    ? salaDescricao.setAttribute("required", "required")
+    : salaDescricao.removeAttribute("required");
 });
 
 // ===== Navegação =====
@@ -38,7 +39,7 @@ function validateStep1() {
     $("#horaInicio"),
     $("#horaFim"),
     $("#salaSelect"),
-    ...(salaSelect.value === "Outros" ? [$("#salaDescricao")] : [])
+    ...(salaSelect.value === "Outros" ? [$("#salaDescricao")] : []),
   ];
 
   for (const el of required) {
@@ -67,25 +68,29 @@ function hydrateEquipAvailability() {
 
 function fillReview() {
   $("#rvNome").textContent = $("#nomeCompleto").value || "—";
-  const salaVal = salaSelect.value === "Outros"
-    ? `Outros (${salaDescricao.value})` : salaSelect.value || "—";
+  const salaVal =
+    salaSelect.value === "Outros"
+      ? `Outros (${salaDescricao.value})`
+      : salaSelect.value || "—";
   $("#rvLocal").textContent = salaVal;
   $("#rvData").textContent = $("#data").value || "—";
-  $("#rvHora").textContent = `${$("#horaInicio").value} - ${$("#horaFim").value}`;
+  $("#rvHora").textContent = `${$("#horaInicio").value} - ${
+    $("#horaFim").value
+  }`;
 
   // equipamentos
   const list = $("#rvEquip");
   list.innerHTML = "";
   const chosen = $$("#step-2 input[type='number']")
-    .filter(i => Number(i.value) > 0)
-    .map(i => ({ nome: i.dataset.equip, qtd: Number(i.value) }));
+    .filter((i) => Number(i.value) > 0)
+    .map((i) => ({ nome: i.dataset.equip, qtd: Number(i.value) }));
 
   if (!chosen.length) {
     const li = document.createElement("li");
     li.textContent = "Nenhum equipamento selecionado.";
     list.appendChild(li);
   } else {
-    chosen.forEach(it => {
+    chosen.forEach((it) => {
       const li = document.createElement("li");
       li.textContent = `${it.nome}: ${it.qtd}`;
       list.appendChild(li);
@@ -133,19 +138,22 @@ form.addEventListener("submit", (e) => {
 
   // monta objeto
   const equipamentos = $$("#step-2 input[type='number']")
-    .filter(i => Number(i.value) > 0)
-    .map(i => ({ nome: i.dataset.equip, quantidade: Number(i.value) }));
+    .filter((i) => Number(i.value) > 0)
+    .map((i) => ({ nome: i.dataset.equip, quantidade: Number(i.value) }));
 
   const agendamento = {
     nome: $("#nomeCompleto").value.trim(),
     data: $("#data").value,
     horaInicio: $("#horaInicio").value,
     horaFim: $("#horaFim").value,
-    sala: salaSelect.value === "Outros" ? `Outros (${salaDescricao.value.trim()})` : salaSelect.value,
+    sala:
+      salaSelect.value === "Outros"
+        ? `Outros (${salaDescricao.value.trim()})`
+        : salaSelect.value,
     repetirSemanalmente: $("#repetirSemanalmente").checked,
     equipamentos,
     observacoes: $("#observacoes").value.trim(),
-    status: "ATIVO"
+    status: "ATIVO",
   };
 
   // salva localmente (p/ próxima tela de cards)
@@ -181,9 +189,7 @@ if (btnConfirmar) {
     const horaFim = document.querySelector("#horaFim").value;
 
     // simulação de equipamentos (ajuste se tiver campo real no form)
-    const equipamentos = [
-      { nome: "Notebook", quantidade: 1 }
-    ];
+    const equipamentos = [{ nome: "Notebook", quantidade: 1 }];
 
     const novo = { nome, sala, data, horaInicio, horaFim, equipamentos };
 
