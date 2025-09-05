@@ -1,113 +1,226 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema de Agendamentos Objetivo</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sistema de Agendamentos • Colégio Objetivo</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Header -->
-  <header class="navbar">
-    <div class="logo">📚 Colégio Objetivo</div>
-    <nav>
-      <ul>
-        <li><a href="#" class="active">Início</a></li>
-        <li><a href="#">Agendamentos</a></li>
-        <li><a href="#">Ajuda</a></li>
-        <li><a href="#">Admin</a></li>
-      </ul>
+  <header class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo" aria-hidden="true">🧭</span>
+      <span>Colégio Objetivo</span>
+    </div>
+    <nav class="nav__menu">
+      <a class="is-active" href="#">Início</a>
+      <a href="agendamentos.html">Agendamentos</a>
+      <a href="#">Ajuda</a>
+      <a href="#">Admin</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-icon">📅</div>
-    <h1>Sistema de <span>agendamentos Objetivo</span></h1>
-    <p>
-      Nosso sistema foi desenvolvido para facilitar a rotina dos professores do Colégio Objetivo: simples, prático e ágil. 
-      Transforme a gestão de equipamentos escolares com uma plataforma eficiente que otimiza o seu dia a dia.
+    <div class="hero__badge" aria-hidden="true">📅</div>
+    <h1 class="hero__title">
+      Sistema de <span class="hero__title--gradient">agendamentos Objetivo</span>
+    </h1>
+    <p class="hero__desc">
+      Nosso sistema foi desenvolvido para facilitar a rotina dos professores do Colégio Objetivo:
+      simples, prático e ágil. Transforme a gestão de equipamentos escolares com uma plataforma
+      eficiente que otimiza o seu dia a dia.
     </p>
   </section>
 
-  <!-- Formulário -->
-  <section class="form-section">
-    <div class="form-card">
+  <!-- Card do formulário -->
+  <main class="wizard">
+    <div class="wizard__head">
       <h2>Novo Agendamento</h2>
       <p>Preencha as informações abaixo para reservar seus equipamentos</p>
-
-      <!-- Barra de progresso -->
-      <div class="steps">
-        <div class="step active">Dados Básicos</div>
-        <div class="step">Equipamentos</div>
-        <div class="step">Confirmação</div>
-      </div>
-
-      <!-- Passo 1 -->
-      <form id="formStep1" class="form-step active">
-        <label for="nome">Nome Completo</label>
-        <input type="text" id="nome" required>
-
-        <label for="data">Data</label>
-        <input type="date" id="data" required>
-
-        <div class="time-group">
-          <div>
-            <label for="horaInicio">Hora Início</label>
-            <input type="time" id="horaInicio" required>
-          </div>
-          <div>
-            <label for="horaFim">Hora Término</label>
-            <input type="time" id="horaFim" required>
-          </div>
-        </div>
-
-        <label for="sala">Sala</label>
-        <select id="sala" required>
-          <option value="">Selecione</option>
-          <option value="TI">Sala TI</option>
-          <option value="Maker">Sala Maker</option>
-          <option value="Outros">Outros</option>
-        </select>
-
-        <div id="salaDescricaoContainer" class="hidden">
-          <label for="salaDescricao">Descrição da Sala</label>
-          <input type="text" id="salaDescricao" placeholder="Descreva a sala">
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="repetir">
-          <label for="repetir">Repetir aula semanalmente no mesmo horário</label>
-        </div>
-
-        <button type="button" class="next-btn">Próximo</button>
-      </form>
-
-      <!-- Passo 2 -->
-      <form id="formStep2" class="form-step">
-        <h3>Selecione os equipamentos</h3>
-        <label><input type="checkbox" value="Notebook"> Notebook</label>
-        <label><input type="checkbox" value="Projetor"> Projetor</label>
-        <label><input type="checkbox" value="Caixa de Som"> Caixa de Som</label>
-
-        <div class="form-nav">
-          <button type="button" class="prev-btn">Voltar</button>
-          <button type="button" class="next-btn">Próximo</button>
-        </div>
-      </form>
-
-      <!-- Passo 3 -->
-      <form id="formStep3" class="form-step">
-        <h3>Confirmação</h3>
-        <div id="resumo"></div>
-
-        <div class="form-nav">
-          <button type="button" class="prev-btn">Voltar</button>
-          <button type="submit" class="submit-btn">Confirmar Reserva</button>
-        </div>
-      </form>
     </div>
-  </section>
+
+    <!-- Stepper -->
+    <div class="stepper" role="tablist" aria-label="Etapas do agendamento">
+      <button type="button" class="stepper__item is-current" data-step="0" role="tab" aria-selected="true">
+        <span class="stepper__icon">👤</span>
+        <span class="stepper__label">Dados Básicos</span>
+      </button>
+      <button type="button" class="stepper__item" data-step="1" role="tab" aria-selected="false" tabindex="-1">
+        <span class="stepper__icon">🖥️</span>
+        <span class="stepper__label">Equipamentos</span>
+      </button>
+      <button type="button" class="stepper__item" data-step="2" role="tab" aria-selected="false" tabindex="-1">
+        <span class="stepper__icon">✅</span>
+        <span class="stepper__label">Confirmação</span>
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form id="wizardForm" novalidate>
+      <!-- STEP 1 -->
+      <section class="step is-visible" id="step-1" aria-labelledby="stepper-0">
+        <div class="field">
+          <label for="nomeCompleto">Nome Completo</label>
+          <input id="nomeCompleto" name="nomeCompleto" type="text" placeholder="Digite seu nome completo" required />
+        </div>
+
+        <div class="field">
+          <label for="data">Data</label>
+          <input id="data" name="data" type="date" required />
+        </div>
+
+        <div class="grid grid--2">
+          <div class="field">
+            <label for="horaInicio">Hora Início</label>
+            <input id="horaInicio" name="horaInicio" type="time" required />
+          </div>
+          <div class="field">
+            <label for="horaFim">Hora Término</label>
+            <input id="horaFim" name="horaFim" type="time" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="salaSelect">Sala</label>
+          <select id="salaSelect" name="salaSelect" required>
+            <option value="">Selecione</option>
+            <option value="Sala TI">Sala TI</option>
+            <option value="Sala Maker">Sala Maker</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <div id="salaOutrosWrap" class="field is-hidden">
+          <label for="salaDescricao">Descrição da Sala</label>
+          <input id="salaDescricao" name="salaDescricao" type="text" placeholder="Ex.: Auditório, 8º B, pátio…" />
+        </div>
+
+        <label class="check">
+          <input id="repetirSemanalmente" type="checkbox" />
+          <span>Repetir aula semanalmente no mesmo horário</span>
+        </label>
+
+        <div class="wizard__footer">
+          <button type="button" class="btn btn--primary" data-next>Próximo</button>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" id="step-2" aria-labelledby="stepper-1">
+        <h3 class="step__title">Equipamentos Disponíveis</h3>
+        <p class="step__subtitle">Selecione os equipamentos e defina a quantidade desejada</p>
+
+        <div id="availability" class="alert alert--success">
+          <span aria-hidden="true">✅</span>
+          <span>Quantidades atualizadas para <b id="avData">—</b> das <b id="avIni">—</b> às <b id="avFim">—</b></span>
+        </div>
+
+        <div class="equip">
+          <!-- item -->
+          <article class="equip__card">
+            <div class="equip__head">
+              <span class="equip__icon" aria-hidden="true">🔊</span>
+              <div>
+                <div class="equip__title">Caixa de som</div>
+                <div class="equip__stock is-ok">1 disponível</div>
+              </div>
+            </div>
+            <label class="equip__qty">
+              <span>Quantidade:</span>
+              <input type="number" min="0" value="0" data-equip="Caixa de som" />
+            </label>
+          </article>
+
+          <article class="equip__card">
+            <div class="equip__head">
+              <span class="equip__icon" aria-hidden="true">🎤</span>
+              <div>
+                <div class="equip__title">Microfone</div>
+                <div class="equip__stock is-ok">2 disponível</div>
+              </div>
+            </div>
+            <label class="equip__qty">
+              <span>Quantidade:</span>
+              <input type="number" min="0" value="0" data-equip="Microfone" />
+            </label>
+          </article>
+
+          <article class="equip__card">
+            <div class="equip__head">
+              <span class="equip__icon" aria-hidden="true">💻</span>
+              <div>
+                <div class="equip__title">Notebook</div>
+                <div class="equip__stock is-ok">19 disponível</div>
+              </div>
+            </div>
+            <label class="equip__qty">
+              <span>Quantidade:</span>
+              <input type="number" min="0" value="0" data-equip="Notebook" />
+            </label>
+          </article>
+
+          <article class="equip__card">
+            <div class="equip__head">
+              <span class="equip__icon" aria-hidden="true">📱</span>
+              <div>
+                <div class="equip__title">Tablet</div>
+                <div class="equip__stock is-ok">23 disponível</div>
+              </div>
+            </div>
+            <label class="equip__qty">
+              <span>Quantidade:</span>
+              <input type="number" min="0" value="0" data-equip="Tablet" />
+            </label>
+          </article>
+        </div>
+
+        <div class="wizard__footer">
+          <button type="button" class="btn" data-prev>← Anterior</button>
+          <button type="button" class="btn btn--primary" data-next>Próximo →</button>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" id="step-3" aria-labelledby="stepper-2">
+        <h3 class="step__title">Confirme seu Agendamento</h3>
+        <p class="step__subtitle">Revise as informações antes de finalizar</p>
+
+        <div class="review">
+          <div>
+            <span class="review__label">NOME COMPLETO</span>
+            <div class="review__value" id="rvNome">—</div>
+          </div>
+          <div>
+            <span class="review__label">LOCAL</span>
+            <div class="review__value" id="rvLocal">—</div>
+          </div>
+          <div>
+            <span class="review__label">DATA</span>
+            <div class="review__value" id="rvData">—</div>
+          </div>
+          <div>
+            <span class="review__label">HORÁRIO</span>
+            <div class="review__value" id="rvHora">—</div>
+          </div>
+        </div>
+
+        <h4 class="review__subtitle">EQUIPAMENTOS SELECIONADOS</h4>
+        <ul id="rvEquip" class="review__list"></ul>
+
+        <div class="field">
+          <label for="observacoes">📝 Observações (opcional)</label>
+          <textarea id="observacoes" placeholder="Adicione observações sobre o agendamento..."></textarea>
+        </div>
+
+        <div class="wizard__footer">
+          <button type="button" class="btn" data-prev>← Anterior</button>
+          <button type="submit" class="btn btn--success">Confirmar Agendamento</button>
+        </div>
+      </section>
+    </form>
+  </main>
 
   <script src="script.js"></script>
 </body>
