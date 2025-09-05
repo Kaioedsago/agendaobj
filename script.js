@@ -166,3 +166,35 @@ form.addEventListener("submit", (e) => {
 
 // inicia
 showStep(0);
+
+const STORAGE = "agendamentos";
+
+// botão de confirmar
+const btnConfirmar = document.querySelector("#btnConfirmar");
+if (btnConfirmar) {
+  btnConfirmar.addEventListener("click", () => {
+    // pegar valores do formulário
+    const nome = document.querySelector("#nome").value;
+    const sala = document.querySelector("#sala").value;
+    const data = document.querySelector("#data").value;
+    const horaInicio = document.querySelector("#horaInicio").value;
+    const horaFim = document.querySelector("#horaFim").value;
+
+    // simulação de equipamentos (ajuste se tiver campo real no form)
+    const equipamentos = [
+      { nome: "Notebook", quantidade: 1 }
+    ];
+
+    const novo = { nome, sala, data, horaInicio, horaFim, equipamentos };
+
+    // pegar lista atual
+    const lista = JSON.parse(localStorage.getItem(STORAGE) || "[]");
+    lista.push(novo);
+
+    // salvar
+    localStorage.setItem(STORAGE, JSON.stringify(lista));
+
+    // redirecionar para listagem
+    window.location.href = "agendamentos.html";
+  });
+}

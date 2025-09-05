@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendamentos</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agendamentos • Colégio Objetivo</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="logo">Colégio Objetivo</div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="agd.html" class="active">Agendamentos</a></li>
-        <li><a href="#">Ajuda</a></li>
-        <li><a href="#">Admin</a></li>
-      </ul>
+  <header class="nav">
+    <div class="nav__brand">
+      <span class="nav__logo" aria-hidden="true">🧭</span>
+      <span>Colégio Objetivo</span>
+    </div>
+    <nav class="nav__menu">
+      <a href="index.html">Início</a>
+      <a class="is-active" href="#">Agendamentos</a>
+      <a href="#">Ajuda</a>
+      <a href="#">Admin</a>
     </nav>
   </header>
 
-  <!-- Cards -->
-  <section class="cards-container">
-    <h1>Agendamentos</h1>
-    <p>Visualize todos os agendamentos realizados no sistema</p>
-
-    <div id="cards" class="cards-grid">
-      <!-- Cards gerados pelo JS aparecerão aqui -->
-    </div>
+  <!-- Título -->
+  <section class="hero">
+    <h1 class="hero__title">Agendamentos</h1>
+    <p class="hero__desc">
+      Visualize todos os agendamentos realizados no sistema
+    </p>
   </section>
 
-  <script src="script.js"></script>
+  <!-- Lista de agendamentos -->
+  <main class="agenda">
+    <div id="agendaList" class="agenda__grid"></div>
+  </main>
+
+  <script src="agendamentos.js"></script>
 </body>
 </html>
